@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  
+  // add a topic
+  addTopic(title: HTMLInputElement): boolean {
+    console.log(`Successfully add a topic: ${title.value}`);
+    return false;
+  }
 }

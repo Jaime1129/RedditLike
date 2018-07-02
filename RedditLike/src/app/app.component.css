@@ -1,0 +1,11 @@
+.card{
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-top: 10px; 
+}
+
+.self-intro {
+    height: 200px;
+}

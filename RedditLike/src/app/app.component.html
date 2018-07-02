@@ -5,17 +5,19 @@
 </div>
 <div class="container">
   <div class="row">
-    <div class="col-sm-4">
-      <h2>About Me</h2>
-      <p>Self Introduction</p>
+    <div class="col-sm-4 ">
+      <div class="card self-intro">
+        <h2 class="card-title">About Me</h2>
+        <p class="card-text">Self Introduction</p>
+      </div>
     </div>
     <div class="col-sm-8">
-      <div class="row">
-          <form role="form" [formGroup]="topicForm" (ngSubmit)="addTopic(topicForm.value)">
-            <h3>Add a Topic</h3>
+      <div class="row card">
+          <h3 class="card-title">Add a Topic</h3>
+          <form role="form" [formGroup]="topicForm" (ngSubmit)="addTopic(topicForm.value)">           
             <div class="form-group">
               <div>
-                <label for="title">Title</label>
+                <label for="title">Title:</label>
                 <input type="text" class="form-control" id="title" name="title" [formControl]="titleControl"
                   placeholder="Please enter the title" #newtitle>
                 <div [hidden]="titleControl.valid || titleControl.untouched">
@@ -29,7 +31,7 @@
                 </div>
               </div>
             </div>
-            <button type="submit" class="btn btn-default" [disabled]="!topicForm.valid">
+            <button type="submit" class="btn btn-primary" [disabled]="!topicForm.valid">
               Submit
             </button>
           </form>

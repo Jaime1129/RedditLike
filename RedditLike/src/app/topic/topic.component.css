@@ -1,0 +1,15 @@
+.upvote {
+    color: white;
+    background-color: #CC6666;
+    border-color: black;
+    border: 1px;
+    margin-right: 2px;
+}
+
+.downvote {
+    color: white;
+    background-color: #B8B8B8;
+    border-color: black;
+    border: 1px;
+    margin-right: 2px;
+}

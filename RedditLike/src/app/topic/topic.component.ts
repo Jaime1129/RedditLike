@@ -6,7 +6,7 @@ import { Topic } from './topic.model';
   templateUrl: './topic.component.html',
   styleUrls: ['./topic.component.css'],
   host: {
-    class: 'row'
+    class: 'row card'
   }
 })
 export class TopicComponent implements OnInit {

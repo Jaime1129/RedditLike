@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Topic } from './topic/topic.model';
 
 @Component({
@@ -8,10 +9,20 @@ import { Topic } from './topic/topic.model';
 })
 export class AppComponent {
   topics: Topic[];
+  
+  // form for creating new topic 
+  titleControl = new FormControl('', [
+    Validators.required,
+    Validators.maxLength(255)
+  ]);
 
-  constructor() {
+  topicForm: FormGroup = this.builder.group({
+    titleControl : this.titleControl
+  });
+
+  constructor(private builder: FormBuilder) {
     this.topics = [];
-    for(let i = 1; i < 25; i ++) {
+    for(let i = 1; i < 10; i ++) {
       this.topics.push(new Topic('Topic'+i, 0));
     }
   }
@@ -27,9 +38,10 @@ export class AppComponent {
   }
 
   // add a topic
-  addTopic(title: HTMLInputElement): boolean {
-    console.log(`Successfully add a topic: ${title.value}`);
-    this.topics.push(new Topic(title.value, 0));
-    return false;
+  addTopic(form: any): void {
+
+    console.log(`Successfully add a topic:`, form.titleControl);
+    this.topics.push(new Topic(form.titleControl, 0));
+
   }
 }

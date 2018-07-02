@@ -42,6 +42,6 @@ export class AppComponent {
 
     console.log(`Successfully add a topic:`, form.titleControl);
     this.topics.push(new Topic(form.titleControl, 0));
-
+    
   }
 }

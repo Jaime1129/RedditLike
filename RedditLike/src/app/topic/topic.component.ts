@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Topic } from './topic.model';
 
 @Component({
   selector: 'app-topic',
@@ -10,21 +11,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopicComponent implements OnInit {
 
-  title: string; // less than 255 characters
-  likes: number; // upvotes minus downvotes
-
-
-  constructor() {
-    this.title = 'RedditTopic';
-    this.likes = 0;
-   }
+  @Input() topic: Topic;
 
   upvote() {
-    this.likes++;
+    this.topic.likes++;
   }
 
   downvote() {
-    this.likes--;
+    this.topic.likes--;
   }
 
   ngOnInit() {

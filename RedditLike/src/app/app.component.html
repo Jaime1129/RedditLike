@@ -25,7 +25,9 @@
       
 
       <div> 
-        <app-topic></app-topic>
+        <app-topic *ngFor="let anytopic of topiclist()" [topic]="anytopic">
+          Topic List is Loading..
+        </app-topic>
       </div>  
 
     </div>

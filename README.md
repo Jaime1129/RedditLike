@@ -17,3 +17,11 @@
 
 ## Integration Test
 
+This application has passed the manual test.
+
+## Deployment
+
+This application has been deployed to Heroku with the link https://redditlike.herokuapp.com/
+
+
+

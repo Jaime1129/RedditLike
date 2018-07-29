@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Topic } from './topic/topic.model';
+import { Topic } from './components/topic.model';
+import { RedditService } from './services/RedditService';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  topics: Topic[];
+export class AppComponent implements OnInit{
+  topics: Object;
   
   // form for creating new topic 
   titleControl = new FormControl('', [
@@ -20,28 +21,37 @@ export class AppComponent {
     titleControl : this.titleControl
   });
 
-  constructor(private builder: FormBuilder) {
-    this.topics = [];
-    for(let i = 1; i < 10; i ++) {
-      this.topics.push(new Topic('Topic'+i, 0));
-    }
+  constructor(
+    private builder: FormBuilder, 
+    private redditService: RedditService ) {
+
   }
   
   // sorted by number of likes and only list top 20 topics
-  topiclist(): Topic[] {    
-    let sortedTopics: Topic[] = this.topics.sort((a: Topic, b: Topic) => b.likes-a.likes);
-    if (sortedTopics.length <= 20) {  
-      return sortedTopics;
-    } else {
-      return sortedTopics.slice(0, 20);
+  updateTopics(update?: boolean): void {    
+  //   let sortedtopics: topic[] = this.topics.sort((a: topic, b: topic) => b.likes-a.likes);
+  //   if (sortedtopics.length <= 20) {  
+  //     return sortedtopics;
+  //   } else {
+  //     return sortedtopics.slice(0, 20);
+  //   }
+    this.topics = null;
+    let results: any = this.redditService.getTopics();
+    if (results) {
+      this.topics = results;
     }
   }
 
   // add a topic
   addTopic(form: any): void {
-
+    this.redditService.newTopic(form.titleControl);    
     console.log(`Successfully add a topic:`, form.titleControl);
-    this.topics.push(new Topic(form.titleControl, 0));
-    
+    // Refresh topic list
+    this.updateTopics();
+  }
+
+  // Render the topic list when initializing this component
+  ngOnInit(): void {
+    this.updateTopics();
   }
 }

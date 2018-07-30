@@ -19,12 +19,12 @@ export class TopicComponent implements OnInit {
   }
 
   upvote() {
-    this.voteService.upVote(this.topic.id);
+    this.voteService.voteById(this.topic.id, true);
     this.update.next(true);
   }
 
   downvote() {
-    this.voteService.downVote(this.topic.id);
+    this.voteService.voteById(this.topic.id, false);
     this.update.next(true);
   }
 

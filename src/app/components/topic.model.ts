@@ -1,9 +1,11 @@
 export class Topic {
+    id: number;
     title: string;
-    likes: number;
+    votes: number;
 
-    constructor(title: string, likes: number) {
+    constructor(id: number, title: string, votes: number) {
+        this.id = id;
         this.title = title;
-        this.likes = likes;
+        this.votes = votes;
     }
 }

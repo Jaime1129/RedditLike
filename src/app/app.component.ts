@@ -9,7 +9,7 @@ import { RedditService } from './services/RedditService';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  topics: Object;
+  topics: Topic[];
   
   // form for creating new topic 
   titleControl = new FormControl('', [
@@ -36,10 +36,12 @@ export class AppComponent implements OnInit{
   //     return sortedtopics.slice(0, 20);
   //   }
     this.topics = null;
-    let results: any = this.redditService.getTopics();
-    if (results) {
-      this.topics = results;
-    }
+    this.redditService.getTopics()
+      .subscribe((res: Topic[]) => {
+        if (res && res.length > 0) {
+          this.topics = res
+        }
+      });
   }
 
   // add a topic
@@ -50,7 +52,7 @@ export class AppComponent implements OnInit{
     this.updateTopics();
   }
 
-  // Render the topic list when initializing this component
+  // Query the topic list when initializing this component
   ngOnInit(): void {
     this.updateTopics();
   }

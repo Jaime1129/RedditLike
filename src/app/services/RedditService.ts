@@ -1,11 +1,12 @@
 import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Topic } from '../components/topic.model';
-import { Http, Response } from '@angular/http';
 import { map } from 'rxjs/operators';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 // Value of url will be injected in app.module
 export const API_URL:string = 'API_URL';
+
 
 @Injectable()
 export class RedditService {
@@ -14,24 +15,23 @@ export class RedditService {
         @Inject(API_URL) private apiUrl: string,
         private http : Http
     ) {
-
+        
     }
 
     // Send titile as parameter to server to create a new topic
-    newTopic(tt: string): boolean {
-        let status: boolean = false;
-        this.http.post(
+    newTopic(tt: string): Observable<boolean> {
+        console.log(tt);
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        let opts = new RequestOptions({headers: headers});
+        return this.http.post(
             `${this.apiUrl}/newtopic`,
             JSON.stringify({
                 title : tt
-            })
-        ).subscribe(
-            (res: Response) => {
-                status = (<any>res.json()).status;
-            }
-        );
-        
-        return status;
+            }), opts
+        ).pipe(map((res: Response) => {
+            return <any>res.json().status;
+        }));
     } 
 
     // Request the sorted topic list (including top 20 topics) from server
@@ -39,10 +39,10 @@ export class RedditService {
         return this.http.get(`${this.apiUrl}/topics`)
             .pipe(map((res: Response) => {
                 return (<any>res.json()).items.map(item => {
-                    return new Topic(item.id, item.title, item.votes);
+                    console.log("item : ", item);
+                    return new Topic(Number(item.id), item.title, Number(item.votes));
                 });
             }));
-            
     }
 }
 

@@ -38,18 +38,20 @@ export class AppComponent implements OnInit{
     this.topics = null;
     this.redditService.getTopics()
       .subscribe((res: Topic[]) => {
+        console.log("topics: ", res);
         if (res && res.length > 0) {
-          this.topics = res
+          this.topics = res;
         }
       });
   }
 
   // add a topic
   addTopic(form: any): void {
-    this.redditService.newTopic(form.titleControl);    
-    console.log(`Successfully add a topic:`, form.titleControl);
-    // Refresh topic list
-    this.updateTopics();
+    this.redditService.newTopic(form.titleControl).subscribe(res => {
+      console.log(`Successfully add a topic:`, form.titleControl);
+      // Refresh topic list
+      this.updateTopics();
+    });    
   }
 
   // Query the topic list when initializing this component

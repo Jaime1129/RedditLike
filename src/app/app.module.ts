@@ -4,6 +4,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 
 /**
@@ -17,6 +18,8 @@ import { TopicComponent } from './components/topic.component';
  */
 import {REDDIT_PROVIDERS, API_URL} from './services/RedditService';
 import {VOTE_PROVIDERS} from './services/VoteService';
+
+
 
 /**
  * Value of url is determined by whether it's under production environment
@@ -32,6 +35,7 @@ const isProduction: boolean = false;
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     HttpModule
   ],
   providers: [
@@ -41,7 +45,7 @@ const isProduction: boolean = false;
       provide: API_URL, 
       useValue: isProduction ? 
         "https://" :
-        "https://localhost:4200"
+        "http://localhost:8080"
     }
   ],
   bootstrap: [AppComponent]

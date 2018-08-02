@@ -14,14 +14,14 @@
 (2) run `npm install`<br>
 (3) run `npm start`<br>
 
-## 2. Design
+## 3. Design
 <b>Q</b>: Why I choose Angular?<br>
 <b>A</b>: 1. It is easier to implement a lightweight application with Angular comparing with Java. 2. As there is no need for data persistence, this application can be designed as a total front-end application without database. 3. Maybe I am more familiar with Java, but if I find some technologies more suitable for my task, I would love to learn it. It won't satisfy me just to complete the work.<br>
 
 <b>Q</b>: How this application is designed?<br>
 <b>A</b>: Basically there are two main components contained in the front-end application. One is the app component, which includes the form used for creating new topic and a topic list. Another is the topic component. Each topic maps to a topic component. The back-end programme is implemented with Express framework (the file name is server.js). Basically there are four request handler functions included.<br>
 
-## 3. API
+## 4. API
 1.newTopic()
 - request:
     - url: "/newtopic"
@@ -30,9 +30,11 @@
 - response:
     - format: json
     - example: 
+    ```
     {
         "status" : "true"
     }
+    ```
 
 2.getTopics()
 - request:
@@ -40,12 +42,14 @@
 - response:
     - format: json
     - example:
+    ```
     {
         "length" : "10",
         "order" : "desc",
-        "items" : [
+        "items" : 
+        [
             {
-                "id" : "1",    // topic id is unique
+                "id" : "1",   
                 "title" : "hello world",
                 "votes" : "3"
             },
@@ -56,21 +60,23 @@
             }
         ]
     }
+    ```
 
 3.voteById()
 - request:
     - url: "/votes"
     - method: get
-    - params: [id: number, type: number] // type's value is either 1 or -1, 1 for upvote, -1 for downvote
+    - params: [id: number, type: number   // type's value is either 1 or -1, 1 for upvote, -1 for downvote
 - response: 
     - format: json
     - example: 
+    ```
     {
-        "id" : "1",    // topic id 
+        "id" : "1",   
         "status" : "true"
     }
-
-## 4. Test
+    ```
+## 5. Test
 
 I used Karma and Jasmine to test the angular application. There are two test files in /src/app/services which end with .spec.ts.
 

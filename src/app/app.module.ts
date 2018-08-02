@@ -24,7 +24,7 @@ import {VOTE_PROVIDERS} from './services/VoteService';
 /**
  * Value of url is determined by whether it's under production environment
  */
-const isProduction: boolean = false;
+const isProduction: boolean = true;
 
 @NgModule({
   declarations: [
@@ -44,7 +44,7 @@ const isProduction: boolean = false;
     {
       provide: API_URL, 
       useValue: isProduction ? 
-        "https://" :
+        "https://redditlike.herokuapp.com":
         "http://localhost:8080"
     }
   ],
